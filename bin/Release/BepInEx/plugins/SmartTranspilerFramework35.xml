@@ -4,12 +4,12 @@
         <name>SmartTranspilerFramework35</name>
     </assembly>
     <members>
-        <member name="T:SmartBepInMods.SmartTranspiler.StaticClassExtensions">
+        <member name="T:SmartTranspilerFramework35.StaticClassExtensions">
             <summary>
             Extentions for all the stuff.
             </summary>
         </member>
-        <member name="M:SmartBepInMods.SmartTranspiler.StaticClassExtensions.HasFlag(System.Enum,System.Enum)">
+        <member name="M:SmartTranspilerFramework35.StaticClassExtensions.HasFlag(System.Enum,System.Enum)">
             <summary>
             A FX 3.5 way to mimic the FX4 "HasFlag" method.
             </summary>
@@ -17,14 +17,14 @@
             <param name="value">The value to test.</param>
             <returns>True if the flag is set. Otherwise false.</returns>
         </member>
-        <member name="M:SmartBepInMods.SmartTranspiler.StaticClassExtensions.GetFlags(System.Enum)">
+        <member name="M:SmartTranspilerFramework35.StaticClassExtensions.GetFlags(System.Enum)">
             <summary>
             A FX 3.5 way to get all flags within the variable.
             </summary>
             <param name="variable">The flags enum.</param>
             <returns></returns>
         </member>
-        <member name="M:SmartBepInMods.SmartTranspiler.StaticClassExtensions.SmartMatch(System.Collections.Generic.IEnumerable{HarmonyLib.CodeInstruction},System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{HarmonyLib.CodeInstruction,SmartBepInMods.SmartTranspiler.Qualifier}},SmartBepInMods.SmartTranspiler.StaticClassExtensions.MatchFound,SmartBepInMods.SmartTranspiler.StaticClassExtensions.Log)">
+        <member name="M:SmartTranspilerFramework35.StaticClassExtensions.SmartMatch(System.Collections.Generic.IEnumerable{HarmonyLib.CodeInstruction},System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{HarmonyLib.CodeInstruction,SmartTranspilerFramework35.Qualifier}},SmartTranspilerFramework35.StaticClassExtensions.MatchFound,SmartTranspilerFramework35.StaticClassExtensions.Log)">
             <summary>
             Searches for all matches and executes the callback method.
             </summary>
@@ -33,7 +33,7 @@
             <param name="Found">Callback delegate for replacing matches.</param>
             <returns>The instructions after all callbacks have completed.</returns>
         </member>
-        <member name="M:SmartBepInMods.SmartTranspiler.StaticClassExtensions.SmartReplaceAll(System.Collections.Generic.IEnumerable{HarmonyLib.CodeInstruction},System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{HarmonyLib.CodeInstruction,SmartBepInMods.SmartTranspiler.Qualifier}},System.Collections.Generic.IEnumerable{HarmonyLib.CodeInstruction},SmartBepInMods.SmartTranspiler.StaticClassExtensions.Log)">
+        <member name="M:SmartTranspilerFramework35.StaticClassExtensions.SmartReplaceAll(System.Collections.Generic.IEnumerable{HarmonyLib.CodeInstruction},System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{HarmonyLib.CodeInstruction,SmartTranspilerFramework35.Qualifier}},System.Collections.Generic.IEnumerable{HarmonyLib.CodeInstruction},SmartTranspilerFramework35.StaticClassExtensions.Log)">
             <summary>
             Replaces all of the match with the provided <b>replacement</b>.
             </summary>
@@ -42,7 +42,7 @@
             <param name="replacement">Replacement instructions.</param>
             <returns>The edited instructions.</returns>
         </member>
-        <member name="M:SmartBepInMods.SmartTranspiler.StaticClassExtensions.SmartNopAll(System.Collections.Generic.IEnumerable{HarmonyLib.CodeInstruction},System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{HarmonyLib.CodeInstruction,SmartBepInMods.SmartTranspiler.Qualifier}},SmartBepInMods.SmartTranspiler.StaticClassExtensions.Log)">
+        <member name="M:SmartTranspilerFramework35.StaticClassExtensions.SmartNopAll(System.Collections.Generic.IEnumerable{HarmonyLib.CodeInstruction},System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{HarmonyLib.CodeInstruction,SmartTranspilerFramework35.Qualifier}},SmartTranspilerFramework35.StaticClassExtensions.Log)">
             <summary>
             Replaces each instruction in the match with a NOP;
             </summary>
@@ -50,7 +50,7 @@
             <param name="match">Instructions to match with qualifiers.</param>
             <returns></returns>
         </member>
-        <member name="M:SmartBepInMods.SmartTranspiler.StaticClassExtensions.SmartPostfix(System.Collections.Generic.IEnumerable{HarmonyLib.CodeInstruction},System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{HarmonyLib.CodeInstruction,SmartBepInMods.SmartTranspiler.Qualifier}},System.Collections.Generic.IEnumerable{HarmonyLib.CodeInstruction},SmartBepInMods.SmartTranspiler.StaticClassExtensions.Log)">
+        <member name="M:SmartTranspilerFramework35.StaticClassExtensions.SmartPostfix(System.Collections.Generic.IEnumerable{HarmonyLib.CodeInstruction},System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{HarmonyLib.CodeInstruction,SmartTranspilerFramework35.Qualifier}},System.Collections.Generic.IEnumerable{HarmonyLib.CodeInstruction},SmartTranspilerFramework35.StaticClassExtensions.Log)">
             <summary>
             Adds the IL code to the end of the match.
             </summary>
@@ -60,7 +60,7 @@
             <param name="log">Logger.</param>
             <returns></returns>
         </member>
-        <member name="M:SmartBepInMods.SmartTranspiler.StaticClassExtensions.SmartPrefix(System.Collections.Generic.IEnumerable{HarmonyLib.CodeInstruction},System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{HarmonyLib.CodeInstruction,SmartBepInMods.SmartTranspiler.Qualifier}},System.Collections.Generic.IEnumerable{HarmonyLib.CodeInstruction},SmartBepInMods.SmartTranspiler.StaticClassExtensions.Log)">
+        <member name="M:SmartTranspilerFramework35.StaticClassExtensions.SmartPrefix(System.Collections.Generic.IEnumerable{HarmonyLib.CodeInstruction},System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{HarmonyLib.CodeInstruction,SmartTranspilerFramework35.Qualifier}},System.Collections.Generic.IEnumerable{HarmonyLib.CodeInstruction},SmartTranspilerFramework35.StaticClassExtensions.Log)">
             <summary>
             Adds the IL code to the beginning of the match.
             </summary>
@@ -70,7 +70,7 @@
             <param name="log">Logger.</param>
             <returns></returns>
         </member>
-        <member name="M:SmartBepInMods.SmartTranspiler.StaticClassExtensions.Qualify(HarmonyLib.CodeInstruction,SmartBepInMods.SmartTranspiler.Qualifier)">
+        <member name="M:SmartTranspilerFramework35.StaticClassExtensions.Qualify(HarmonyLib.CodeInstruction,SmartTranspilerFramework35.Qualifier)">
             <summary>
             Convience function for adding a qualifier
             </summary>
@@ -78,32 +78,32 @@
             <param name="qualifier">Qualifier.</param>
             <returns></returns>
         </member>
-        <member name="T:SmartBepInMods.SmartTranspiler.Qualifier">
+        <member name="T:SmartTranspilerFramework35.Qualifier">
             <summary>
             Qualifier for CodeInstructions to match.
             </summary>
         </member>
-        <member name="F:SmartBepInMods.SmartTranspiler.Qualifier.OpCode">
+        <member name="F:SmartTranspilerFramework35.Qualifier.OpCode">
             <summary>
             Matches the OpCode of this <b>CodeInstruction</b>
             </summary>
         </member>
-        <member name="F:SmartBepInMods.SmartTranspiler.Qualifier.Operand">
+        <member name="F:SmartTranspilerFramework35.Qualifier.Operand">
             <summary>
             Matches the Operand of this <b>CodeInstruction</b>
             </summary>
         </member>
-        <member name="F:SmartBepInMods.SmartTranspiler.Qualifier.Labels">
+        <member name="F:SmartTranspilerFramework35.Qualifier.Labels">
             <summary>
             Matches the Labels of this <b>CodeInstruction</b>
             </summary>
         </member>
-        <member name="F:SmartBepInMods.SmartTranspiler.Qualifier.Blocks">
+        <member name="F:SmartTranspilerFramework35.Qualifier.Blocks">
             <summary>
             Matches the Blocks of this <b>CodeInstruction</b>
             </summary>
         </member>
-        <member name="F:SmartBepInMods.SmartTranspiler.Qualifier.Default">
+        <member name="F:SmartTranspilerFramework35.Qualifier.Default">
             <summary>
             Only matches the OpCode of the <b>CodeInstruction</b>, the only consistently !null value.
             </summary>

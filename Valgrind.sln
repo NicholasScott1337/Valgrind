@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.30711.63
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Valgrind", "Valgrind.csproj", "{8006ADF6-FA38-443D-A1E5-FD4C94E301BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartTranspilerFramework35", "..\SmartTranspilerFramework35\SmartTranspilerFramework35.csproj", "{5A002B9F-FF09-48CA-B085-695E87F05D3B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartBepInMods", "..\SmartTranspilerFramework35\SmartBepInMods.csproj", "{5A002B9F-FF09-48CA-B085-695E87F05D3B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartDiscord", "..\SmartDiscord\SmartDiscord.csproj", "{9BE84852-FD2F-4DA0-919C-42372BEDFD24}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{5A002B9F-FF09-48CA-B085-695E87F05D3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A002B9F-FF09-48CA-B085-695E87F05D3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A002B9F-FF09-48CA-B085-695E87F05D3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BE84852-FD2F-4DA0-919C-42372BEDFD24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BE84852-FD2F-4DA0-919C-42372BEDFD24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BE84852-FD2F-4DA0-919C-42372BEDFD24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BE84852-FD2F-4DA0-919C-42372BEDFD24}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

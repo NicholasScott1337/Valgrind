@@ -1,5 +1,5 @@
 ﻿using HarmonyLib;
-using SmartTranspilerFramework35;
+using SmartBepInMods.SmartTranspiler;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -14,8 +14,7 @@ namespace Valgrind.Patches
     /// <summary>
     /// Server priority. Top of the list with 420 babayy.
     /// </summary>
-    [HarmonyPatch(typeof(ZSteamMatchmaking), "RequestDedicatedServers", null)]
-    
+    [HarmonyPatch(typeof(ZSteamMatchmaking), "RequestDedicatedServers", null)]  
     class Patch_ZSteamMatchmaking_RequestDedicatedServers
     {
         private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
@@ -62,7 +61,6 @@ namespace Valgrind.Patches
     /// New button for joining the server
     /// </summary>
     [HarmonyPatch(typeof(FejdStartup), "Start", null)]
-    
     class Patch_FejdStartup_Start
     {
         public static Button JoinValgrind;
@@ -100,7 +98,6 @@ namespace Valgrind.Patches
                 if (i <= 0) up = true;
 
                 Patch_FejdStartup_Start.JoinValgrind.GetComponentInChildren<Text>().color = ClassExtensions.HSL2RGB(i, 0.5, 0.5);
-                Plugin.LOG.LogInfo(i);
             }
         }
     }
