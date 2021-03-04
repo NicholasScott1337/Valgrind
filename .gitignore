@@ -16,8 +16,10 @@
 *.userprefs
 
 # Build results
+[Mm]igrationBackup/
 [Dd]ebug/
 [Dd]ebugPublic/
+[Bb]in/[Rr]elease/
 x64/
 x86/
 [Aa][Rr][Mm]/

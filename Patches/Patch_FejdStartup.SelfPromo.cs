@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
-using SmartBepInMods.SmartTranspiler;
+using SmartBepInMods.Transpiling;
+using SmartBepInMods.Patching;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -8,14 +9,15 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 using Valgrind.Util;
+using SmartBepInMods.Patching.Constants;
 
 namespace Valgrind.Patches
 {
     /// <summary>
     /// Server priority. Top of the list with 420 babayy.
     /// </summary>
-    [HarmonyPatch(typeof(ZSteamMatchmaking), "RequestDedicatedServers", null)]  
-    class Patch_ZSteamMatchmaking_RequestDedicatedServers
+    [HarmonyPatch(typeof(ZSteamMatchmaking), "RequestDedicatedServers", null)]
+    public class Patch_ZSteamMatchmaking_RequestDedicatedServers : CLIENT
     {
         private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
         {
@@ -61,7 +63,7 @@ namespace Valgrind.Patches
     /// New button for joining the server
     /// </summary>
     [HarmonyPatch(typeof(FejdStartup), "Start", null)]
-    class Patch_FejdStartup_Start
+    public class Patch_FejdStartup_Start : CLIENT
     {
         public static Button JoinValgrind;
         private static void Postfix(FejdStartup __instance)
@@ -83,7 +85,7 @@ namespace Valgrind.Patches
     /// Rainbow effect on the Join V+ Server button.
     /// </summary>
     [HarmonyPatch(typeof(FejdStartup), "Update", null)]
-    class Patch_FejdStartup_Update
+    public class Patch_FejdStartup_Update : CLIENT
     {
         static bool up = true;
         static double i = 0;

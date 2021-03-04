@@ -4,12 +4,66 @@
         <name>SmartTranspilerFramework35</name>
     </assembly>
     <members>
-        <member name="T:SmartBepInMods.SmartTranspiler.StaticClassExtensions">
+        <member name="T:SmartBepInMods.Patching.Constants.Patchable">
+            <summary>
+            This is the root of all "Labels".
+            Deriving a class from this will make a new label.
+            You can then do <b>Patchable.Patch()</b>.
+            </summary>
+        </member>
+        <member name="T:SmartBepInMods.Patching.Constants.CLIENT">
+            <summary>
+            CLIENT Label
+            </summary>
+        </member>
+        <member name="T:SmartBepInMods.Patching.Constants.SERVER">
+            <summary>
+            SERVER Label
+            </summary>
+        </member>
+        <member name="T:SmartBepInMods.Patching.Constants.SHARED">
+            <summary>
+            SHARED Label
+            </summary>
+        </member>
+        <member name="T:SmartBepInMods.Patching.Constants.DEBUG">
+            <summary>
+            DEBUG Label
+            </summary>
+        </member>
+        <member name="T:SmartBepInMods.Patching.SmartPatcher">
+            <summary>
+            Patcher service for patching methods in segments.
+            </summary>
+        </member>
+        <member name="P:SmartBepInMods.Patching.SmartPatcher.Instance">
+            <summary>
+            The instance of Harmony for this plugin.
+            </summary>
+        </member>
+        <member name="M:SmartBepInMods.Patching.SmartPatcher.PatchGameAuto(System.Reflection.Assembly,SmartBepInMods.Tools.Log,System.Boolean)">
+            <summary>
+            Patch all methods related to the current environment(Server or Client)
+            Defaults to Shared!
+            </summary>
+            <param name="assembly">Your Assembly.GetExecutingAssembly().</param>
+            <param name="log">Logging method.</param>
+            <param name="debug">Optionally trigger DEBUG instead</param>
+        </member>
+        <member name="M:SmartBepInMods.Patching.SmartPatcher.PatchGameRaw``1(System.Reflection.Assembly,SmartBepInMods.Tools.Log)">
+            <summary>
+            Patch all methods within the type derived from Constant.
+            </summary>
+            <typeparam name="T">Type to search for.</typeparam>
+            <param name="assembly">Your Assembly.GetExecutingAssembly()</param>
+            <param name="log">Logging method.</param>
+        </member>
+        <member name="T:SmartBepInMods.Transpiling.StaticClassExtensions">
             <summary>
             Extentions for all the stuff.
             </summary>
         </member>
-        <member name="M:SmartBepInMods.SmartTranspiler.StaticClassExtensions.HasFlag(System.Enum,System.Enum)">
+        <member name="M:SmartBepInMods.Transpiling.StaticClassExtensions.HasFlag(System.Enum,System.Enum)">
             <summary>
             A FX 3.5 way to mimic the FX4 "HasFlag" method.
             </summary>
@@ -17,40 +71,50 @@
             <param name="value">The value to test.</param>
             <returns>True if the flag is set. Otherwise false.</returns>
         </member>
-        <member name="M:SmartBepInMods.SmartTranspiler.StaticClassExtensions.GetFlags(System.Enum)">
+        <member name="M:SmartBepInMods.Transpiling.StaticClassExtensions.GetFlags(System.Enum)">
             <summary>
             A FX 3.5 way to get all flags within the variable.
             </summary>
             <param name="variable">The flags enum.</param>
             <returns></returns>
         </member>
-        <member name="M:SmartBepInMods.SmartTranspiler.StaticClassExtensions.SmartMatch(System.Collections.Generic.IEnumerable{HarmonyLib.CodeInstruction},System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{HarmonyLib.CodeInstruction,SmartBepInMods.SmartTranspiler.Qualifier}},SmartBepInMods.SmartTranspiler.StaticClassExtensions.MatchFound,SmartBepInMods.SmartTranspiler.StaticClassExtensions.Log)">
+        <member name="T:SmartBepInMods.Transpiling.StaticClassExtensions.MatchFound">
+            <summary>
+            Delegate for substituting the match.
+            </summary>
+            <param name="CutSource">The match IL code.</param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartBepInMods.Transpiling.StaticClassExtensions.SmartMatch(System.Collections.Generic.IEnumerable{HarmonyLib.CodeInstruction},System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{HarmonyLib.CodeInstruction,SmartBepInMods.Transpiling.Qualifier}},SmartBepInMods.Transpiling.StaticClassExtensions.MatchFound,SmartBepInMods.Tools.Log)">
             <summary>
             Searches for all matches and executes the callback method.
             </summary>
             <param name="search">List of instructions to search(this).</param>
             <param name="match">List of instructions w/ qualifiers to match to.</param>
             <param name="Found">Callback delegate for replacing matches.</param>
+            <param name="log">Log item.</param>
             <returns>The instructions after all callbacks have completed.</returns>
         </member>
-        <member name="M:SmartBepInMods.SmartTranspiler.StaticClassExtensions.SmartReplaceAll(System.Collections.Generic.IEnumerable{HarmonyLib.CodeInstruction},System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{HarmonyLib.CodeInstruction,SmartBepInMods.SmartTranspiler.Qualifier}},System.Collections.Generic.IEnumerable{HarmonyLib.CodeInstruction},SmartBepInMods.SmartTranspiler.StaticClassExtensions.Log)">
+        <member name="M:SmartBepInMods.Transpiling.StaticClassExtensions.SmartReplaceAll(System.Collections.Generic.IEnumerable{HarmonyLib.CodeInstruction},System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{HarmonyLib.CodeInstruction,SmartBepInMods.Transpiling.Qualifier}},System.Collections.Generic.IEnumerable{HarmonyLib.CodeInstruction},SmartBepInMods.Tools.Log)">
             <summary>
             Replaces all of the match with the provided <b>replacement</b>.
             </summary>
             <param name="search">Items to search(this).</param>
             <param name="match">Items to match to.</param>
             <param name="replacement">Replacement instructions.</param>
+            <param name="log">Log item.</param>
             <returns>The edited instructions.</returns>
         </member>
-        <member name="M:SmartBepInMods.SmartTranspiler.StaticClassExtensions.SmartNopAll(System.Collections.Generic.IEnumerable{HarmonyLib.CodeInstruction},System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{HarmonyLib.CodeInstruction,SmartBepInMods.SmartTranspiler.Qualifier}},SmartBepInMods.SmartTranspiler.StaticClassExtensions.Log)">
+        <member name="M:SmartBepInMods.Transpiling.StaticClassExtensions.SmartNopAll(System.Collections.Generic.IEnumerable{HarmonyLib.CodeInstruction},System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{HarmonyLib.CodeInstruction,SmartBepInMods.Transpiling.Qualifier}},SmartBepInMods.Tools.Log)">
             <summary>
             Replaces each instruction in the match with a NOP;
             </summary>
             <param name="search">This :D</param>
             <param name="match">Instructions to match with qualifiers.</param>
+            <param name="log">Log item.</param>
             <returns></returns>
         </member>
-        <member name="M:SmartBepInMods.SmartTranspiler.StaticClassExtensions.SmartPostfix(System.Collections.Generic.IEnumerable{HarmonyLib.CodeInstruction},System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{HarmonyLib.CodeInstruction,SmartBepInMods.SmartTranspiler.Qualifier}},System.Collections.Generic.IEnumerable{HarmonyLib.CodeInstruction},SmartBepInMods.SmartTranspiler.StaticClassExtensions.Log)">
+        <member name="M:SmartBepInMods.Transpiling.StaticClassExtensions.SmartPostfix(System.Collections.Generic.IEnumerable{HarmonyLib.CodeInstruction},System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{HarmonyLib.CodeInstruction,SmartBepInMods.Transpiling.Qualifier}},System.Collections.Generic.IEnumerable{HarmonyLib.CodeInstruction},SmartBepInMods.Tools.Log)">
             <summary>
             Adds the IL code to the end of the match.
             </summary>
@@ -60,7 +124,7 @@
             <param name="log">Logger.</param>
             <returns></returns>
         </member>
-        <member name="M:SmartBepInMods.SmartTranspiler.StaticClassExtensions.SmartPrefix(System.Collections.Generic.IEnumerable{HarmonyLib.CodeInstruction},System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{HarmonyLib.CodeInstruction,SmartBepInMods.SmartTranspiler.Qualifier}},System.Collections.Generic.IEnumerable{HarmonyLib.CodeInstruction},SmartBepInMods.SmartTranspiler.StaticClassExtensions.Log)">
+        <member name="M:SmartBepInMods.Transpiling.StaticClassExtensions.SmartPrefix(System.Collections.Generic.IEnumerable{HarmonyLib.CodeInstruction},System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{HarmonyLib.CodeInstruction,SmartBepInMods.Transpiling.Qualifier}},System.Collections.Generic.IEnumerable{HarmonyLib.CodeInstruction},SmartBepInMods.Tools.Log)">
             <summary>
             Adds the IL code to the beginning of the match.
             </summary>
@@ -70,7 +134,7 @@
             <param name="log">Logger.</param>
             <returns></returns>
         </member>
-        <member name="M:SmartBepInMods.SmartTranspiler.StaticClassExtensions.Qualify(HarmonyLib.CodeInstruction,SmartBepInMods.SmartTranspiler.Qualifier)">
+        <member name="M:SmartBepInMods.Transpiling.StaticClassExtensions.Qualify(HarmonyLib.CodeInstruction,SmartBepInMods.Transpiling.Qualifier)">
             <summary>
             Convience function for adding a qualifier
             </summary>
@@ -78,34 +142,144 @@
             <param name="qualifier">Qualifier.</param>
             <returns></returns>
         </member>
-        <member name="T:SmartBepInMods.SmartTranspiler.Qualifier">
+        <member name="T:SmartBepInMods.Transpiling.Qualifier">
             <summary>
             Qualifier for CodeInstructions to match.
             </summary>
         </member>
-        <member name="F:SmartBepInMods.SmartTranspiler.Qualifier.OpCode">
+        <member name="F:SmartBepInMods.Transpiling.Qualifier.OpCode">
             <summary>
             Matches the OpCode of this <b>CodeInstruction</b>
             </summary>
         </member>
-        <member name="F:SmartBepInMods.SmartTranspiler.Qualifier.Operand">
+        <member name="F:SmartBepInMods.Transpiling.Qualifier.Operand">
             <summary>
             Matches the Operand of this <b>CodeInstruction</b>
             </summary>
         </member>
-        <member name="F:SmartBepInMods.SmartTranspiler.Qualifier.Labels">
+        <member name="F:SmartBepInMods.Transpiling.Qualifier.Labels">
             <summary>
             Matches the Labels of this <b>CodeInstruction</b>
             </summary>
         </member>
-        <member name="F:SmartBepInMods.SmartTranspiler.Qualifier.Blocks">
+        <member name="F:SmartBepInMods.Transpiling.Qualifier.Blocks">
             <summary>
             Matches the Blocks of this <b>CodeInstruction</b>
             </summary>
         </member>
-        <member name="F:SmartBepInMods.SmartTranspiler.Qualifier.Default">
+        <member name="F:SmartBepInMods.Transpiling.Qualifier.Default">
             <summary>
             Only matches the OpCode of the <b>CodeInstruction</b>, the only consistently !null value.
+            </summary>
+        </member>
+        <member name="T:SmartBepInMods.Tools.Log">
+            <summary>
+            Base Universal log delegate
+            </summary>
+            <param name="s"></param>
+        </member>
+        <member name="T:SmartBepInMods.Tools.Extensions">
+            <summary>
+            Utility functions!
+            </summary>
+        </member>
+        <member name="M:SmartBepInMods.Tools.Extensions.Deserialize``1(System.String)">
+            <summary>
+            Parses the object from JSON
+            </summary>
+            <typeparam name="T">Object</typeparam>
+            <param name="data">JSON</param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartBepInMods.Tools.Extensions.Serialize(SmartBepInMods.Tools.Serializable)">
+            <summary>
+            Parses the object to JSON
+            </summary>
+            <param name="serializable"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartBepInMods.Tools.Extensions.PostMessage(System.String,SmartBepInMods.Tools.Serializable)">
+            <summary>
+            Posts a message to Discord via a Webhook
+            </summary>
+            <param name="body">This.</param>
+            <param name="endpoint">Webhook URL</param>
+        </member>
+        <member name="M:SmartBepInMods.Tools.Extensions.GetMessage(System.String,SmartBepInMods.Tools.Serializable)">
+            <summary>
+            Gets an item from discord.
+            </summary>
+            <param name="body">This.</param>
+            <param name="endpoint">Webhook URL</param>
+        </member>
+        <member name="T:SmartBepInMods.Tools.Discord.Webhook">
+            <summary>
+            Webhook object
+            </summary>
+        </member>
+        <member name="M:SmartBepInMods.Tools.Discord.Webhook.GetWebhook(System.String,System.String)">
+            <summary>
+            Gets the webhook object for the given id
+            </summary>
+            <param name="id">YOUR ID</param>
+            <param name="token">YOUR TOKEN</param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartBepInMods.Tools.Discord.Webhook.Execute(System.String,System.String,SmartBepInMods.Tools.Discord.Webhook.ExecuteForm)">
+            <summary>
+            Executes the webhook object!
+            </summary>
+            <param name="id"></param>
+            <param name="token"></param>
+        </member>
+        <member name="T:SmartBepInMods.Tools.Discord.Webhook.ExecuteForm">
+            <summary>
+            Form for Webhook.Execute()
+            </summary>
+        </member>
+        <member name="T:SmartBepInMods.Tools.Discord.User">
+            <summary>
+            User object
+            </summary>
+        </member>
+        <member name="T:SmartBepInMods.Tools.Discord.Embed">
+            <summary>
+            Embed object
+            </summary>
+        </member>
+        <member name="T:SmartBepInMods.Tools.Discord.Embed.Footer">
+            <summary>
+            Embed Footer object
+            </summary>
+        </member>
+        <member name="T:SmartBepInMods.Tools.Discord.Embed.Image">
+            <summary>
+            Embed Image object
+            </summary>
+        </member>
+        <member name="T:SmartBepInMods.Tools.Discord.Embed.Thumbnail">
+            <summary>
+            Embed Thumbnail object
+            </summary>
+        </member>
+        <member name="T:SmartBepInMods.Tools.Discord.Embed.Video">
+            <summary>
+            Embed Video object
+            </summary>
+        </member>
+        <member name="T:SmartBepInMods.Tools.Discord.Embed.Provider">
+            <summary>
+            Embed Provider object
+            </summary>
+        </member>
+        <member name="T:SmartBepInMods.Tools.Discord.Embed.Author">
+            <summary>
+            Embed Author object
+            </summary>
+        </member>
+        <member name="T:SmartBepInMods.Tools.Discord.Embed.Field">
+            <summary>
+            Embed Field object
             </summary>
         </member>
     </members>

@@ -1,12 +1,8 @@
 ﻿using BepInEx;
 using BepInEx.Logging;
-using HarmonyLib;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using SmartBepInMods.Tools.Patching;
+using SmartBepInMods.Tools.Patching.Constants;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Valgrind
 {
@@ -14,11 +10,25 @@ namespace Valgrind
     public class Plugin : BaseUnityPlugin
     {
         public static ManualLogSource LOG;
+        private static Assembly _Assembly;
         public void Awake()
         {
             LOG = this.Logger;
-            var x = Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly()).GetPatchedMethods().ToArray().Length;
-            base.Logger.LogInfo($"Patched {x} method{(x > 1 ? "s" : "")}");
+            _Assembly = Assembly.GetExecutingAssembly();
+
+            _Assembly.PatchGameAuto(LOG.LogInfo, false);
+        }
+
+        public void Update()
+        {
+            if (_Assembly.GetEnvArg(LOG.LogInfo) == typeof(SERVER))
+            {
+                // Do server stuff
+            }
+            else if (_Assembly.GetEnvArg(LOG.LogInfo) == typeof(CLIENT))
+            {
+                // Do client stuff
+            }
         }
     }
 }
