@@ -7,40 +7,24 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Valgrind", "Valgrind.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartBepInMods", "..\SmartBepInMods\SmartBepInMods.csproj", "{5A002B9F-FF09-48CA-B085-695E87F05D3B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FBB8C393-AD10-4ADD-9125-A612B49A1FC1}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Client|Any CPU = Client|Any CPU
-		Client-Release|Any CPU = Client-Release|Any CPU
-		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 		Server|Any CPU = Server|Any CPU
-		Server-Release|Any CPU = Server-Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8006ADF6-FA38-443D-A1E5-FD4C94E301BE}.Client|Any CPU.ActiveCfg = Client|Any CPU
-		{8006ADF6-FA38-443D-A1E5-FD4C94E301BE}.Client|Any CPU.Build.0 = Client|Any CPU
-		{8006ADF6-FA38-443D-A1E5-FD4C94E301BE}.Client-Release|Any CPU.ActiveCfg = Client-Release|Any CPU
-		{8006ADF6-FA38-443D-A1E5-FD4C94E301BE}.Client-Release|Any CPU.Build.0 = Client-Release|Any CPU
-		{8006ADF6-FA38-443D-A1E5-FD4C94E301BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8006ADF6-FA38-443D-A1E5-FD4C94E301BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8006ADF6-FA38-443D-A1E5-FD4C94E301BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8006ADF6-FA38-443D-A1E5-FD4C94E301BE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8006ADF6-FA38-443D-A1E5-FD4C94E301BE}.Server|Any CPU.ActiveCfg = Server|Any CPU
 		{8006ADF6-FA38-443D-A1E5-FD4C94E301BE}.Server|Any CPU.Build.0 = Server|Any CPU
-		{8006ADF6-FA38-443D-A1E5-FD4C94E301BE}.Server-Release|Any CPU.ActiveCfg = Server-Release|Any CPU
-		{8006ADF6-FA38-443D-A1E5-FD4C94E301BE}.Server-Release|Any CPU.Build.0 = Server-Release|Any CPU
-		{5A002B9F-FF09-48CA-B085-695E87F05D3B}.Client|Any CPU.ActiveCfg = Client|Any CPU
-		{5A002B9F-FF09-48CA-B085-695E87F05D3B}.Client|Any CPU.Build.0 = Client|Any CPU
-		{5A002B9F-FF09-48CA-B085-695E87F05D3B}.Client-Release|Any CPU.ActiveCfg = Client-Release|Any CPU
-		{5A002B9F-FF09-48CA-B085-695E87F05D3B}.Client-Release|Any CPU.Build.0 = Client-Release|Any CPU
-		{5A002B9F-FF09-48CA-B085-695E87F05D3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5A002B9F-FF09-48CA-B085-695E87F05D3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A002B9F-FF09-48CA-B085-695E87F05D3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A002B9F-FF09-48CA-B085-695E87F05D3B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5A002B9F-FF09-48CA-B085-695E87F05D3B}.Server|Any CPU.ActiveCfg = Server|Any CPU
-		{5A002B9F-FF09-48CA-B085-695E87F05D3B}.Server|Any CPU.Build.0 = Server|Any CPU
-		{5A002B9F-FF09-48CA-B085-695E87F05D3B}.Server-Release|Any CPU.ActiveCfg = Server-Release|Any CPU
-		{5A002B9F-FF09-48CA-B085-695E87F05D3B}.Server-Release|Any CPU.Build.0 = Server-Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

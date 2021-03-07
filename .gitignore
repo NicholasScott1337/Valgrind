@@ -27,6 +27,7 @@ x86/
 bld/
 [Oo]bj/
 [Ll]og/
+Tokens.cs
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/

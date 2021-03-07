@@ -38,7 +38,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Server|AnyCPU'">
     <OutputPath>bin\Server\</OutputPath>
-    <DefineConstants>TRACE;SERVER</DefineConstants>
+    <DefineConstants>TRACE;TOKEN_SAFE</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -63,6 +63,10 @@
       <HintPath>D:\Program Files (x86)\Steam\steamapps\common\Valheim\valheim_Data\Managed\assembly_guiutils.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="assembly_lux">
+      <HintPath>D:\Program Files (x86)\Steam\steamapps\common\Valheim\valheim_Data\Managed\assembly_lux.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="assembly_simplemeshcombine">
       <HintPath>D:\Program Files (x86)\Steam\steamapps\common\Valheim dedicated server\valheim_server_Data\Managed\assembly_simplemeshcombine.dll</HintPath>
       <Private>False</Private>
@@ -71,8 +75,12 @@
       <HintPath>D:\Program Files (x86)\Steam\steamapps\common\Valheim\valheim_Data\Managed\assembly_steamworks.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="assembly_utils">
+      <HintPath>D:\Program Files (x86)\Steam\steamapps\common\Valheim\valheim_Data\Managed\assembly_utils.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="assembly_valheim">
-      <HintPath>D:\Program Files (x86)\Steam\steamapps\common\Valheim\valheim_Data\Managed\assembly_valheim.dll</HintPath>
+      <HintPath>D:\Program Files (x86)\Steam\steamapps\common\Valheim dedicated server\valheim_server_Data\Managed\assembly_valheim.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="BepInEx">
@@ -80,7 +88,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="SmartBepInMods">
-      <HintPath>..\SmartBepInMods\bin\Release\SmartBepInMods.dll</HintPath>
+      <HintPath>..\SmarterTranspiler\bin\References\SmartBepInMods.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -336,10 +344,23 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
-    <Compile Include="Patches\Patch_FejdStartup.SelfPromo.cs" />
+    <Compile Include="Events\Shared.cs" />
+    <Compile Include="Patches\Client\Patch_Chat_Awake.cs" />
+    <Compile Include="Patches\Client\Patch_Chat_OnNewChatMessage.cs" />
+    <Compile Include="Patches\Client\Trans_Patch_ZSteamMatchmaking_RequestDedicatedServers.cs" />
+    <Compile Include="Patches\Client\Patch_FejdStartup_Start.cs" />
+    <Compile Include="Patches\Server\Patch_Chat_OnNewChatMessage.cs" />
+    <Compile Include="Patches\Server\Patch_Chat_Awake.cs" />
+    <Compile Include="Plugin.cs" />
+    <Compile Include="Patches\Client\Patch_Chat_SendText.cs" />
+    <Compile Include="Patches\Client\Patch_FejdStartup_Update.cs" />
+    <Compile Include="Events\Server.cs" />
+    <Compile Include="Events\Client.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Util\ColorRGB.cs" />
+    <Compile Include="Tokens.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".editorconfig" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
