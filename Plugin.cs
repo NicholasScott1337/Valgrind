@@ -8,7 +8,7 @@ using System.Reflection;
 
 namespace Valgrind
 {
-    [BepInPlugin("com.nicholascott.valheim.valgrindclient", "Valgrind", "0.0.1")]
+    [BepInPlugin("com.nicholascott.valheim.valgrindclient", "Valgrind", "0.1.1")]
     public class Plugin : BaseUnityPlugin
     {
 
