@@ -219,7 +219,7 @@ namespace Valgrind.Events
                     } else if (((Talker.Type)type) == Talker.Type.Shout)
                     {
                         SendMessageToAdmin($"[{SteamID}] ({SteamProfile.personaname}) {desiredName}", $"`Sent message via Shout channel` \n{text}", false, SteamProfile.avatarmedium);
-                        SendMessageToIngame(desiredName, text, SteamProfile.avatarmedium);
+                        SendMessageToIngame(desiredName, text);
                         ZRoutedRpc.instance.InvokeRoutedRPC(ZRoutedRpc.Everybody, "ChatMessage", new object[]
                         {
                             headpoint,

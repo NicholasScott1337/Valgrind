@@ -351,6 +351,7 @@
     <Compile Include="Patches\Client\Patch_FejdStartup_Start.cs" />
     <Compile Include="Patches\Server\Patch_Chat_OnNewChatMessage.cs" />
     <Compile Include="Patches\Server\Patch_Chat_Awake.cs" />
+    <Compile Include="Patches\Server\Patch_ZNet_SetServer.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Patches\Client\Patch_Chat_SendText.cs" />
     <Compile Include="Patches\Client\Patch_FejdStartup_Update.cs" />

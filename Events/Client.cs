@@ -36,6 +36,7 @@ namespace Valgrind.Events
             public static bool OnNewChatMessage(Chat self, ref float ___m_hideTimer, GameObject go, long senderID, Vector3 pos, Talker.Type type, ref string user, ref string text)
             {
                 ___m_hideTimer = 0f;
+                if (type == Talker.Type.Ping) return CONST.SKIP;
                 typeof(Chat).GetMethod("AddString", CONST.ALLFLAGS, null, new Type[] {
                     typeof(string), typeof(string), typeof(Talker.Type)
                 }, null).Invoke(self, new object[] {
