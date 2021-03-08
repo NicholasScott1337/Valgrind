@@ -347,11 +347,15 @@
     <Compile Include="Events\Shared.cs" />
     <Compile Include="Patches\Client\Patch_Chat_Awake.cs" />
     <Compile Include="Patches\Client\Patch_Chat_OnNewChatMessage.cs" />
+    <Compile Include="Patches\Client\Patch_ZNet_Error.cs" />
     <Compile Include="Patches\Client\Trans_Patch_ZSteamMatchmaking_RequestDedicatedServers.cs" />
     <Compile Include="Patches\Client\Patch_FejdStartup_Start.cs" />
     <Compile Include="Patches\Server\Patch_Chat_OnNewChatMessage.cs" />
     <Compile Include="Patches\Server\Patch_Chat_Awake.cs" />
+    <Compile Include="Patches\Server\Patch_ZNet_ServerHandshake.cs" />
     <Compile Include="Patches\Server\Patch_ZNet_SetServer.cs" />
+    <Compile Include="Patches\Shared\Patch_WearNTear_RPC_Damage.cs" />
+    <Compile Include="Patches\Shared\Patch_ZNet_OnNewConnection.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Patches\Client\Patch_Chat_SendText.cs" />
     <Compile Include="Patches\Client\Patch_FejdStartup_Update.cs" />
@@ -363,6 +367,7 @@
   <ItemGroup>
     <None Include=".editorconfig" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy "$(TargetDir)*.dll" "D:\Program Files (x86)\Steam\steamapps\common\Valheim\BepInEx\plugins"

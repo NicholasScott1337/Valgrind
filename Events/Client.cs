@@ -37,7 +37,6 @@ namespace Valgrind.Events
             {
                 if (type != Talker.Type.Ping)
                 {
-
                     ___m_hideTimer = 0f;
                     typeof(Chat).GetMethod("AddString", CONST.ALLFLAGS, null, new Type[] {
                         typeof(string), typeof(string), typeof(Talker.Type)

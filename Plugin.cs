@@ -4,7 +4,7 @@ using SmartBepInMods.Tools.Patching;
 using SmartBepInMods.Tools.Patching.Constants;
 using SmartBepInMods.Tools.Logging;
 using System.Reflection;
-
+using UnityEngine;
 
 namespace Valgrind
 {
@@ -36,6 +36,5 @@ namespace Valgrind
                 // Do client stuff
             }
         }
-
     }
 }

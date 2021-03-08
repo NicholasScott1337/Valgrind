@@ -1,8 +1,10 @@
-﻿using SmartBepInMods.Tools;
+﻿using HarmonyLib;
+using SmartBepInMods.Tools;
 using SmartBepInMods.Tools.Patching.Constants;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
@@ -52,6 +54,22 @@ namespace Valgrind.Events
                         ).SendIt()).ToList();
                 return _SpecialUsers;
             }
+        }
+        
+        public static SmartBepInMods.Tools.Steam.SteamUser ValidateSteamUserInfo(string SteamID)
+        {
+            SmartBepInMods.Tools.Steam.SteamUser SteamProfile;
+
+            if (KnownProfiles.Exists(f => f.steamid == SteamID))
+            {
+                SteamProfile = KnownProfiles.Find(f => f.steamid == SteamID);
+            }
+            else
+            {
+                KnownProfiles.Add(SmartBepInMods.Tools.Steam.SteamUser.GetFromID(SteamID, MyTokens.GetValue("SteamKEY", "")));
+                SteamProfile = KnownProfiles[KnownProfiles.Count - 1];
+            }
+            return SteamProfile;
         }
         public static List<SmartBepInMods.Tools.Steam.SteamUser> KnownProfiles = new List<SmartBepInMods.Tools.Steam.SteamUser>();
         public struct SpecialUsers
@@ -126,19 +144,13 @@ namespace Valgrind.Events
         {
             public static void StaffMessage(long shizid, string text, int type, Vector3 headpoint, string desiredName)
             {
+                if (text == "I have arrived!") return;
+
                 var Peer = ZNet.instance.GetPeer(shizid);
                 var SteamID = Peer.m_socket.GetHostName(); // Very reliable and secure(heh)
-                SmartBepInMods.Tools.Steam.SteamUser SteamProfile;
 
-                if (KnownProfiles.Exists(f => f.steamid == SteamID))
-                {
-                    SteamProfile = KnownProfiles.Find(f => f.steamid == SteamID);
-                }
-                else
-                {
-                    KnownProfiles.Add(SmartBepInMods.Tools.Steam.SteamUser.GetFromID(SteamID, MyTokens.GetValue("SteamKEY", "")));
-                    SteamProfile = KnownProfiles[KnownProfiles.Count - 1];
-                }
+                SmartBepInMods.Tools.Steam.SteamUser SteamProfile = ValidateSteamUserInfo(SteamID);
+
 
                 if (Server.Instance.ExceptionalUsers.Exists(f => f.steamid64 == SteamID))
                 {
@@ -237,6 +249,34 @@ namespace Valgrind.Events
                         });
                     }
                 }
+            }
+        }
+        public struct ZNET
+        {
+            public static bool ServerHandshake(ZNet __instance, ref ZRpc rpc)
+            {
+                var peer = typeof(ZNet).GetMethod("GetPeer", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic, null, new Type[]{
+                    typeof(ZRpc)
+                }, null).Invoke(__instance, new object[] {
+                    rpc
+                });
+                if (peer == null)
+                {
+                    return SmartBepInMods.Tools.Patching.Constants.CONST.SKIP;
+                }
+                typeof(ZNet).GetMethod("ClearPlayerData", BindingFlags.Instance | BindingFlags.NonPublic, null, new Type[]
+                {
+                    typeof(ZNetPeer),
+                }, null).Invoke(__instance, new object[] { peer });
+
+                var SteamID = (peer as ZNetPeer).m_socket.GetHostName(); // Very reliable and secure(heh)
+
+                SendMessageToAdmin("Valgrind Plus", $"User with SteamID: {SteamID} tried to join the server!", false);
+
+                (peer as ZNetPeer).m_rpc.Invoke("Error", new object[] { 7 });
+                (peer as ZNetPeer).m_rpc.Invoke("ValgrindHandshake", new object[] { 0 });
+
+                return SmartBepInMods.Tools.Patching.Constants.CONST.SKIP;
             }
         }
     }
