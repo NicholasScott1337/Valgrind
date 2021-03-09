@@ -354,7 +354,8 @@
     <Compile Include="Patches\Server\Patch_Chat_Awake.cs" />
     <Compile Include="Patches\Server\Patch_ZNet_ServerHandshake.cs" />
     <Compile Include="Patches\Server\Patch_ZNet_SetServer.cs" />
-    <Compile Include="Patches\Shared\Patch_WearNTear_RPC_Damage.cs" />
+    <Compile Include="Patches\Client\Patch_WearNTear_Damage.cs" />
+    <Compile Include="Patches\Shared\Patch_SE_Harpooned_Setup.cs" />
     <Compile Include="Patches\Shared\Patch_ZNet_OnNewConnection.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Patches\Client\Patch_Chat_SendText.cs" />

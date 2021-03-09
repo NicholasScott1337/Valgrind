@@ -123,5 +123,30 @@ namespace Valgrind.Events
                 x.Add(y);
             }
         }
+        public struct WEARNTEAR
+        {
+            public static bool Damage(WearNTear __instance, ref HitData hit)
+            {
+                if (AccessTools.FieldRefAccess<WearNTear, ZNetView>(__instance, "m_nview").IsValid())
+                {
+                    var Ply = Player.m_localPlayer;
+                    if (Ply != null && PrivateArea.CheckInPrivateArea(hit.m_point))
+                    {
+                        if (Ply.GetZDOID() != hit.m_attacker)
+                        {
+                            return SmartBepInMods.Tools.Patching.Constants.CONST.SKIP;
+                        }
+                        else
+                        {
+                            if (!PrivateArea.CheckAccess(hit.m_point, 0))
+                            {
+                                return SmartBepInMods.Tools.Patching.Constants.CONST.SKIP;
+                            }
+                        }
+                    } 
+                }
+                return SmartBepInMods.Tools.Patching.Constants.CONST.NOSKIP;
+            }
+        }
     }
 }

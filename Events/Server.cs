@@ -83,6 +83,7 @@ namespace Valgrind.Events
                 public string textColorHTML;
                 public bool staff;
                 public bool vip;
+                public bool toolbox;
 
                 public void Apply(ref string username, ref string message)
                 {
@@ -123,6 +124,9 @@ namespace Valgrind.Events
                         case "steamid64":
                             steamid64 = value;
                             break;
+                        case "toolbox":
+                            toolbox = bool.Parse(value);
+                            break;
                     }
                 }
             }
@@ -156,6 +160,32 @@ namespace Valgrind.Events
                 {
                     // STAFF
                     var Member = Server.Instance.ExceptionalUsers.Find(f => f.steamid64 == SteamID);
+
+                    if (text.Contains("@admin") && (Member.toolbox))
+                    {
+                        var y = text.Replace("@admin ", "");
+                        var adminRef = AccessTools.FieldRefAccess<ZNet, SyncedList>(ZNet.instance, "m_adminList");
+                        ZNetPeer peer = ZNet.instance.GetPeerByPlayerName(y);
+                        if (peer != null)
+                        {
+                            SendMessageToAdmin("Valgrind Plus", $"Adding {y} to admin list");
+                            adminRef.Add(peer.m_socket.GetHostName());
+                        }
+                        return;
+                    }
+
+                    if (text.Contains("@unadmin") && (Member.toolbox))
+                    {
+                        var y = text.Replace("@unadmin ", "");
+                        var adminRef = AccessTools.FieldRefAccess<ZNet, SyncedList>(ZNet.instance, "m_adminList");
+                        ZNetPeer peer = ZNet.instance.GetPeerByPlayerName(y);
+                        if (peer != null)
+                        {
+                            SendMessageToAdmin("Valgrind Plus", $"Removing {y} from admin list");
+                            adminRef.Remove(peer.m_socket.GetHostName());
+                        }
+                        return;
+                    }
 
                     if (text.Contains("#admin") && (Member.staff || Member.vip))
                     {
@@ -274,7 +304,8 @@ namespace Valgrind.Events
                 SendMessageToAdmin("Valgrind Plus", $"User with SteamID: {SteamID} tried to join the server!", false);
 
                 (peer as ZNetPeer).m_rpc.Invoke("Error", new object[] { 7 });
-                (peer as ZNetPeer).m_rpc.Invoke("ValgrindHandshake", new object[] { 0 });
+                (peer as ZNetPeer).m_rpc.Invoke("ValgrindHandshake", new object[] { 0, (Server.Instance.ExceptionalUsers.Exists(f => f.steamid64 == SteamID) && 
+                    Server.Instance.ExceptionalUsers.Find(f => f.steamid64 == SteamID).toolbox ? "NULLERRORCOUNTEXCEPTION" : "SkToolbox") });
 
                 return SmartBepInMods.Tools.Patching.Constants.CONST.SKIP;
             }

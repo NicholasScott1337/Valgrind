@@ -5,6 +5,7 @@ using SmartBepInMods.Tools.Patching.Constants;
 using SmartBepInMods.Tools.Logging;
 using System.Reflection;
 using UnityEngine;
+using System.Net;
 
 namespace Valgrind
 {
@@ -23,6 +24,9 @@ namespace Valgrind
             SmartLog.Instance.LogChannel += (s) => { LOG.LogInfo(s.obj); };
 
             _Assembly.PatchGameAuto(_DEBUG);
+
+            HttpListener WebhookListener = new HttpListener();
+            
         }
 
         public void Update()
