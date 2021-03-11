@@ -37,7 +37,7 @@ namespace Valgrind
             }
             else if (_Assembly.GetEnvArg() == typeof(CLIENT))
             {
-                // Do client stuff
+                Events.Client.DOOR.Update();
             }
         }
     }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
-namespace Valgrind.Patches.Shared
+namespace Valgrind.Patches.Client
 {
     [HarmonyPatch(typeof(WearNTear), "Damage", null)]
     class Patch_WearNTear_Damage : SmartBepInMods.Tools.Patching.Constants.CLIENT

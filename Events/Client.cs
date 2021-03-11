@@ -73,7 +73,7 @@ namespace Valgrind.Events
 
             static bool up = true;
             static double i = 0;
-            public static bool Start(FejdStartup self) 
+            public static bool Start(FejdStartup self)
             {
                 Button v = GameObject.Instantiate(self.m_manualIPButton, self.m_serverListPanel.transform);
 
@@ -130,22 +130,79 @@ namespace Valgrind.Events
                 if (AccessTools.FieldRefAccess<WearNTear, ZNetView>(__instance, "m_nview").IsValid())
                 {
                     var Ply = Player.m_localPlayer;
-                    if (Ply != null && PrivateArea.CheckInPrivateArea(hit.m_point))
+                    if (Ply != null && PrivateArea.CheckInPrivateArea(hit.m_point, true))
                     {
-                        if (Ply.GetZDOID() != hit.m_attacker)
-                        {
-                            return SmartBepInMods.Tools.Patching.Constants.CONST.SKIP;
-                        }
-                        else
-                        {
-                            if (!PrivateArea.CheckAccess(hit.m_point, 0))
-                            {
-                                return SmartBepInMods.Tools.Patching.Constants.CONST.SKIP;
-                            }
-                        }
-                    } 
+                        return SmartBepInMods.Tools.Patching.Constants.CONST.SKIP;
+                    }
                 }
                 return SmartBepInMods.Tools.Patching.Constants.CONST.NOSKIP;
+            }
+        }
+        public struct DESTRUCTIBLE
+        {
+            public static bool Damage(Destructible __instance, ref HitData hit)
+            {
+                if (AccessTools.FieldRefAccess<Destructible, ZNetView>(__instance, "m_nview").IsValid())
+                {
+                    var Ply = Player.m_localPlayer;
+                    if (Ply != null && __instance.GetComponent<SpawnArea>() != null && PrivateArea.CheckInPrivateArea(hit.m_point, true))
+                    {
+                        return SmartBepInMods.Tools.Patching.Constants.CONST.SKIP;
+                    }
+                }
+                return SmartBepInMods.Tools.Patching.Constants.CONST.NOSKIP;
+            }
+        }
+        public struct DOOR
+        {
+            public static ZNetView DoorTracker;
+            public static Door DoorInst;
+            public static Character CharTracker;
+            private static float refDist = 0f;
+            public static float maxDist = 2f;
+            public static void Interact(Door __instance, ZNetView ___m_nview)
+            {
+                if (Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.RightAlt))
+                {
+                    return;
+                }
+                var Ply = Player.m_localPlayer;
+                CloseTrackedDoor();
+                DoorTracker = ___m_nview;
+                DoorInst = __instance;
+                CharTracker = Ply;
+                refDist = Vector3.Distance(Ply.transform.position, __instance.transform.position);
+            }
+            public static void Update()
+            {
+                var Ply = CharTracker;
+                if (DoorTracker != null)
+                {
+                    var xDist = Vector3.Distance(Ply.transform.position, DoorInst.transform.position);
+                    if (xDist < refDist)
+                    {
+                        refDist = xDist;
+                        return;
+                    }
+                    if (ZInput.GetButton("Use") || ZInput.GetButton("JoyUse"))
+                    {
+                        return;
+                    }
+                    if (xDist - refDist >= maxDist)
+                    {
+                        CloseTrackedDoor();
+                    }
+                }
+            }
+            public static void CloseTrackedDoor()
+            {
+                if (DoorTracker != null)
+                {
+                    DoorTracker.GetZDO().Set("state", 0);
+                    DoorTracker = null;
+                    CharTracker = null;
+                    refDist = 0f;
+                }
             }
         }
     }
